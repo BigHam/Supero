@@ -36,7 +36,6 @@
 												<label for="titulo" class="col-form-label">Título</label> 
 												<input type="text" th:field="*{titulo}" class="form-control" 
 												      autofocus="autofocus" id="titulo" placeholder="Título" th:errorclass="is-invalid" th:value="${titulo}" th:disabled="*{situacao.estado}==50" >
-											   <th th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}" class="alert alert-danger" >*</th>
 												
 											</div>
 											<div class="form-group col-md-9">

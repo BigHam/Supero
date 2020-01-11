@@ -7,8 +7,6 @@
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,9 +73,7 @@ public class TaskController {
     
     @GetMapping("/excluir/{id}")
     public String excluir(@PathVariable("id") int id) {
-    	Task task = taskRepository.findById(id).orElse(null);
-    	logger.info("Vai excluir tarefa {}", task.getId());
-		Task terceiro = taskRepository.findById(id)
+		Task task = taskRepository.findById(id)
 				.orElseThrow(() -> new IllegalArgumentException("Identificação da Tarefa inválida: " + id));
     	 taskRepository.delete(task);
     	return "redirect:/tasks";

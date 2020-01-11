@@ -6,7 +6,6 @@
  */
 package br.com.supero.task.controller;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
