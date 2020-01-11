@@ -1,0 +1,93 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+  <head th:insert="fragments/template :: header"> </head>
+  <head th:insert="fragments/tabelas :: tabelaModelo01"> </head>
+  
+  <link th:rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.9.0/css/bootstrap-select.min.css}" />
+  <script th:src="@{//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.9.0/js/bootstrap-select.min.js}"></script>
+
+<body id="page-top">
+	<div th:replace="fragments/template :: navbarMenu"></div>
+	
+	<div id="wrapper">
+		<div id="content-wrapper">
+			<div class="container-fluid">
+				<div class="card mb-3">
+					<div class="card-header">
+						<!-- Breadcrumbs-->
+				        <ol class="breadcrumb breadcrumb-fixed">
+			                <span class="btn disabled bg-info text-light">Tarefas</span>
+							<li id="breadCrumbList" class="breadcrumb-item active">
+								<a href="/" class="btn text-info"> 
+									   <i class="fas fa-table"></i>
+								</a>
+							</li>
+							<li id="breadCrumbNew" class="breadcrumb-item">
+							    <a href="/nova" class="btn text-info"> 
+							         <i	class="far fa-file"></i>
+								</a>
+							</li>
+						</ol>
+
+					</div>
+					<div class="container">
+						<form id="formTask" th:action="@{/salvar}" th:object="${task}" method="post">
+	    
+					   		 <div class="tab-content">
+								<div class="form-row">
+											 <input type="hidden"  th:field="*{id}" id="id" th:value="${id}">
+											 
+											<div class="form-group ">
+												<label for="titulo" class="col-form-label">Título</label> 
+												<input type="text" th:field="*{titulo}" class="form-control" 
+												      autofocus="autofocus" id="titulo" placeholder="Título" th:errorclass="is-invalid" th:value="${titulo}" th:disabled="*{situacao.estado}==50" >
+											   <th th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}" class="alert alert-danger" >*</th>
+												
+											</div>
+											<div class="form-group col-md-9">
+												<label for="descricao" class="col-form-label">Descrição</label> 
+												<input type="text" th:field="*{descricao}" class="form-control"
+													id="descricao" placeholder="Descrição" maxlength="200" th:errorclass="is-invalid" th:disabled="*{situacao.estado}==50">
+											</div>
+											<div class="form-group col-md-2">
+												<label for="modalidadePreco" class="col-form-label">Situacao</label>
+												<select id="situacao" title='Situação'  class="form-control"  th:field="*{situacao}" th:disabled="*{situacao.estado}==50">
+												    <option th:each="situacao : ${T(br.com.supero.task.model.Situacao).values()}"
+												            th:value="${situacao}"
+												            th:text="${situacao.descricao}">
+												    </option>
+												</select>										 
+											</div>
+					
+									</div>
+					
+					        	</div>
+								<div class="col-md-10">
+									<div class="content-fluid">
+								
+										<input type="submit" class="btn btn-primary" th:value="Salvar">
+										<a class="btn btn-warning" href="/">Voltar</a> 
+									</div>
+								</div>
+						    </form>
+				    	</div> <!-- container --> 
+				    </div> <!--  card -->
+		  		</div> <!--  container-fluid -->
+	
+		  </div>
+		  <!-- /.content-wrapper -->
+	</div>
+	<!-- /#wrapper -->
+
+	<div th:replace="fragments/template :: rodape"></div>
+	
+
+	<script th:inline="javascript">
+    /*<![CDATA[*/
+	  // Sessao para jafascript no padrão Thymeleaf	
+
+    /*]]>*/
+    
+    </script>
+</body>
+
+</html>

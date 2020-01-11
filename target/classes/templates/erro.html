@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+<head th:insert="fragments/template :: header">
+</head>
+
+	<body>
+		<!-- Navbar -->
+ 	    <div th:replace="fragments/template :: navbarMenu"></div>
+ 	    
+	
+		<div class="container ">
+            <div class="row d-flex justify-content-center"> 
+	          <div class="col-xl-4 col-sm-6 mb-3">
+	            <div class="card text-white bg-danger o-hidden h-100">
+	              <div class="card-body">
+	                <div class="card-body-icon">
+	                	<i class="fas fa-exclamation-triangle"></i>
+	                </div>
+	                <div class="mr-7">ERRO:</div>
+        				<p th:utext="${errorMessage}"></p>
+        				<a href="index.html" th:href="@{/}">Voltar</a>
+	              </div>
+	              <a class="card-footer text-white clearfix small z-1" href="#">
+	                <span class="float-left">Em caso de dúvida, contate o administrador do sistema.</span>
+	              </a>
+	            </div>
+	          </div>
+ 			</div> 
+	   </div>
+
+        <div th:fragment="fragments/template :: rodape"></div>
+		
+		
+	</body>
+</html>
