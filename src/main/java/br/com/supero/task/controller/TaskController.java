@@ -1,4 +1,9 @@
-package br.com.supero.task.controller;
+/**
+ * Programador: Alcir
+ * Data: 10/01/2020
+ * Finalidade: Controllers da aplicação. Não implementei todas as práticas de REST, mas ao menos a listagem dos dados utiliza micro serviço REST
+ * Demandante: Supero - Desafio de programação
+ */package br.com.supero.task.controller;
 
 import java.util.List;
 

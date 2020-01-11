@@ -1,7 +1,16 @@
 /**
  * Programador: Alcir
  * Data: 10/01/2020
- * Finalidade: configuracoes necessárias para o projeto Spring Boot (ver dependências no POM)
+ * Finalidade: Configuracoes necessárias para o projeto Spring Boot (ver dependências no POM)
+ *             Não implementei segurança na aplicação pois não estava no escopo da demanda
+ *             Funcionalidades implementadas: 
+ *             	• Adicionar novas tarefas;
+				• Marcar e desmarcar o status de concluído;
+				• Editar o conteúdo da task;
+				• Deletar uma task;
+				• Versionamento com Git;
+			  Funcionalidades adicionais:
+			  	- Comportamento do form de edição conforme o estado da tarefa (disabilitado quando a tarefa foi cancelada)
  * Demandante: Supero - Desafio de programação
  */
 package br.com.supero.task.config;

@@ -1,21 +1,17 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
   <head th:insert="fragments/template :: header"> </head>
-  <head th:insert="fragments/tabelas :: tabelaModelo01"> </head>
   
   <link th:rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.9.0/css/bootstrap-select.min.css}" />
   <script th:src="@{//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.9.0/js/bootstrap-select.min.js}"></script>
 
-<body id="page-top">
-	<div th:replace="fragments/template :: navbarMenu"></div>
-	
-	<div id="wrapper">
-		<div id="content-wrapper">
-			<div class="container-fluid">
-				<div class="card mb-3">
-					<div class="card-header">
+<body >
+	<div class="container-fluid">
+	   <div th:replace="fragments/template :: navbarMenu"></div>
+		  <div class="container">
+					<div class="table-responsive">
 						<!-- Breadcrumbs-->
 				        <ol class="breadcrumb breadcrumb-fixed">
-			                <span class="btn disabled bg-info text-light">Tarefas</span>
+			                <li class="btn disabled bg-info text-light">Tarefas</li>
 							<li id="breadCrumbList" class="breadcrumb-item active">
 								<a href="/" class="btn text-info"> 
 									   <i class="fas fa-table"></i>
@@ -69,12 +65,10 @@
 									</div>
 								</div>
 						    </form>
-				    	</div> <!-- container --> 
-				    </div> <!--  card -->
+<!-- 				    	</div>  card -->
+				    </div> <!-- container --> 
 		  		</div> <!--  container-fluid -->
 	
-		  </div>
-		  <!-- /.content-wrapper -->
 	</div>
 	<!-- /#wrapper -->
 
