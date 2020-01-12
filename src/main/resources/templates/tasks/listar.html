@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+   <head th:insert="fragments/template :: header"> </head>
+   
+   <head th:insert="fragments/tabelas :: tabelaModelo01"> </head>
+   <Head>
+    <title>Listar Tarefas</title>
+   </Head>
+
+	<body>
+ 		<div class="container-fluid">
+   			<div th:replace="fragments/template :: navbarMenu"></div> 	    
+	
+			<div class="container">
+				<div class="table-responsive">
+						        <!-- Breadcrumbs-->
+		        <ol class="breadcrumb breadcrumb-fixed">
+	                <li class="btn disabled bg-info text-light">Tarefas</li>
+					<li id="breadCrumbList" class="breadcrumb-item active">
+						<a href="/" class="btn text-info"> 
+							   <i class="fas fa-table"></i>
+						</a>
+					</li>
+					<li id="breadCrumbNew" class="breadcrumb-item">
+					    <a href="/nova" class="btn text-info"> 
+					         <i	class="far fa-file"></i>
+						</a>
+					</li>
+				</ol>
+   					<table class="display nowrap cell-border" id="tabelaTasks" style="width:100%" >
+                      <thead>
+                          <tr>
+		                   		<th></th>
+		                   		<th></th>
+		                   		<th></th>
+		                   		<th>ID</th>
+		                    	<th>Tarefa</th>
+		                    	<th>Descrição</th>
+		                    	<th>Criação</th>
+		                    	<th>Útima Atualização</th>
+		                    	<th>Conclusão</th>
+		                    	<th></th>
+                            </tr>
+                        </thead>
+
+                 	</table>
+				</div>
+		  	</div>
+			<div class="card-footer small text-muted">Atualizado às <b th:text="*{#dates.format(execInfo.now.time, 'dd/MM/yyyy HH:mm')}"> </b> </div>
+    	</div>
+    	<ul id="legenda">
+    	</ul>
+    		
+    	<div th:fragment="fragments/template :: rodape"></div>
+    <script th:inline="javascript">
+      /*<![CDATA[*/
+	      // Sessao para jafascript no padrão Thymeleaf	
+
+     	  // funcao para chamar a uri de exclusao de tarefas
+     	  function excluir(registroId){
+         	if (registroId!==undefined) {
+	            resposta = confirm("Confirma excluir a tarefa [" + registroId + "] ?");
+	            if (resposta) {
+	            	window.location = "/excluir/" + registroId;
+	            }
+          	}
+     	  }
+
+    	  // Componete dataTable anexado ao projeto como recurso estático. Fonte: https://datatables.net/
+		  var tabela =  $('#tabelaTasks').DataTable( {
+			  fixedColumns: {leftColumns: 4}
+		      //,processing: true
+              ,order: [ 3, 'desc']
+              ,ajax:{url:"/dados",dataSrc:""}
+              ,pageLength: 8
+              ,lengthMenu: [ 8, 16, 32]
+		      ,columns: [
+		           { data: 'situacaoIcone', width:'3%', orderable: false}
+				      
+		    	  ,{
+		    		  data: null,
+		    		  render: function ( dado, type, row ) {
+		    		    return '<a id="editar" name="editar" class="fas fa-edit" title="Editar Registro" href="/editar/' + dado.id + '"> </a>';
+		    		  }
+		    	  },
+			      {
+		    		  data: null,
+		    		  render: function ( dado, type, row ) {
+		    		    return '<a id="excluir" name="excluir" class="fas fa-trash-alt text-danger" title="Excluir Registro" href="#" onClick="excluir(' + dado.id  + ');" aria-label="Excluir"></a>';
+		    		  }
+			      },
+		    	  { data: 'id'},
+		          { data: 'titulo'},
+		          { data: 'descricao'},
+		          { data: 'dataCriacao'},
+		          { data: 'dataAtualizacao'},
+		          { data: 'dataConclusao'},
+		          { data: 'situacao', visible:false}
+		          
+		      ]
+		      
+		      ,language: {
+		          url: '/datatables/i18n/pt_BR.json'
+		          ,emptyTable: "Não há tarefas para listar"
+		      }
+
+
+		  });
+
+        /*]]>*/
+     
+      </script>               
+		
+	</body>
+</html>
