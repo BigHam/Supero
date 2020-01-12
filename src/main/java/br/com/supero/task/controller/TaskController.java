@@ -26,7 +26,7 @@ import br.com.supero.task.repository.TaskRepository;
 public class TaskController {
     //private static Logger logger = LoggerFactory.getLogger(HandleController.class);
 
-	@GetMapping(value= {"/tasks","/"})
+	@GetMapping(value= {"/"})
 	public String home() {
 		return "tasks/listar";
 		
@@ -78,6 +78,6 @@ public class TaskController {
 		Task task = taskRepository.findById(id)
 				.orElseThrow(() -> new IllegalArgumentException("Identificação da Tarefa inválida: " + id));
     	 taskRepository.delete(task);
-    	return "redirect:/tasks";
+    	return "redirect:/";
     }
 }
