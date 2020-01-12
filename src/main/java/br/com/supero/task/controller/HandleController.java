@@ -42,7 +42,7 @@ public class HandleController implements ErrorController  {
     
     @RequestMapping("/error")
     public String handleError(HttpServletRequest request, Model model) {
-        model.addAttribute("errorMessage", "Página não encontrada");
+        model.addAttribute("errorMessage", "Erro não tratado");
        return "erro";
     }
 

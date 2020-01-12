@@ -70,8 +70,10 @@
 		  var tabela =  $('#tabelaTasks').DataTable( {
 			  fixedColumns: {leftColumns: 4}
 		      //,processing: true
+              ,order: [ 3, 'desc']
               ,ajax:{url:"/dados",dataSrc:""}
-		      
+              ,pageLength: 8
+              ,lengthMenu: [ 8, 16, 32]
 		      ,columns: [
 		           { data: 'situacaoIcone', width:'3%', orderable: false}
 				      

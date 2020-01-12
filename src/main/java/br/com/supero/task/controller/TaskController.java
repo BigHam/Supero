@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -39,7 +40,7 @@ public class TaskController {
     @GetMapping("/dados")
     @ResponseBody
     public List<Task> taskDados() {
-        return taskRepository.findAll();
+        return taskRepository.findAll(new Sort(Sort.Direction.ASC, "id"));
     }
     
     @GetMapping("/nova")
@@ -51,11 +52,14 @@ public class TaskController {
     @PostMapping("/salvar")
     public String ordemServicoSalvar(@ModelAttribute Task task, BindingResult result, Model model) {
         if (result.hasErrors() ) {
-        	System.out.println("Erro de validacao");
             model.addAttribute("task", task);
+            model.addAttribute("alertaErro", "Existem erros de validação, corrija-os e tente salvar novamente.");
             return "tasks/nova";
         }
-
+        if (task.getId()==0)
+            model.addAttribute("alertaSucesso", "Tarefa criada com sucesso.");
+        else
+          model.addAttribute("alertaSucesso", "Tarefa atualizada com sucesso.");
     	taskRepository.save(task);
     	model.addAttribute("task", task);
         return "tasks/form";

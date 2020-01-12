@@ -9,17 +9,20 @@ package br.com.supero.task.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotEmpty;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -28,6 +31,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 public class Task {
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
+	@NotEmpty(message="Título deve ser informado.")
 	private String titulo;
     @Enumerated(EnumType.STRING)
 	private Situacao situacao=Situacao.NOVA;
@@ -35,10 +39,13 @@ public class Task {
     @JsonFormat(pattern="dd/MM/yyyy HH:mm")
     @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	@Temporal(TemporalType.TIMESTAMP)
+    @CreationTimestamp
+    @Column(nullable = false, updatable=false)
     private Date dataCriacao;
     @JsonFormat(pattern="dd/MM/yyyy HH:mm")
     @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	@Temporal(TemporalType.TIMESTAMP)
+    @UpdateTimestamp
     private Date dataAtualizacao;
     @JsonFormat(pattern="dd/MM/yyyy HH:mm")
     @DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
@@ -75,10 +82,6 @@ public class Task {
 		return dataAtualizacao;
 	}
 	
-    @PrePersist
-    protected void onCreate() {
-    	dataAtualizacao = dataCriacao = new Date();
-    }
 
     @PreUpdate
     protected void onUpdate() {
