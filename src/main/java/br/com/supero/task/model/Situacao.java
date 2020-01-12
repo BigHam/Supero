@@ -1,7 +1,7 @@
 package br.com.supero.task.model;
 
 public enum Situacao {
-    NOVA("<i class='fa fa-flag fa-inverse text-muted' title='Planejada'></i></span>","Nova",0), 
+    NOVA("<i class='fa fa-flag fa-inverse text-muted' title='Nova'></i></span>","Nova",0), 
     EXCECUTANDO("<i class='fa fa-flag fa-inverse text-primary' title = 'Executando'></i>","Executando",10), 
     ATRASADA("<i class='fa fa-flag fa-inverse text-warning' title='Atrasada'></i>", "Atrasada",20), 
     FINALIZADA("<i class='fa fa-flag fa-inverse text-success' title='Finalizada'></i>","Finalizada",40), 
